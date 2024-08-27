@@ -45,4 +45,19 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
+    public Member findOne(Long id) {
+        //return memberRepository.findOne(id);      old_version 기준
+        return memberRepository.findById(id).get();
+    }
+
+    /**
+     * 회원 수정 - 변경 감지 기능 사용 (병합X)
+     */
+    @Transactional
+    public void update(Long id, String name) {
+        //Member member = memberRepository.findOne(id);     old_version 기준
+        Member member = memberRepository.findById(id).get();
+        member.setName(name);
+    }
+
 }
